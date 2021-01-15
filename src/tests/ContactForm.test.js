@@ -22,8 +22,6 @@ describe('Form tests', () => {
     allInputs.forEach((input) => {
       userEvent.clear(input);
       userEvent.type(input, 'Hi');
-      // Old nasty way
-      // fireEvent.type(input, { target: { value: 'Hi' } });
     });
   };
 
