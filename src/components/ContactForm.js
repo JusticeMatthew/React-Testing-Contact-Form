@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import Results from './Results';
+
 const ContactForm = () => {
   const [data, setData] = useState();
   const { register, errors, handleSubmit } = useForm({
@@ -62,12 +64,8 @@ const ContactForm = () => {
             ref={register({ required: false })}
           />
         </div>
-        {/* // Had to set an aria lable for this because pre elements are not accessible which is not only unacceptable, it also made it hard for the tests to find it. */}
-        {data && (
-          <pre style={{ textAlign: 'left', color: 'white' }}>
-            {JSON.stringify(data, null, 2)}
-          </pre>
-        )}
+        {/* Had to literally make a whole new component to get this working because the state plays nicer when it's passed as props so I can set  a value in testing without all the mock config BS*/}
+        <Results data={data} />
         <input type='submit' />
       </form>
     </div>

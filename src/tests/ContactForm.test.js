@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import ContactForm from '../Components/ContactForm';
+import Results from '../Components/Results';
 
 describe('Form tests', () => {
   render(<ContactForm />);
@@ -25,6 +26,14 @@ describe('Form tests', () => {
     });
   };
 
+  // Mock data for post submission render test
+  const data = {
+    firstName: 'Hi',
+    lastName: 'Hi',
+    email: 'Hi',
+    message: 'Hi',
+  };
+
   test('Form renders correctly/sanity checker', () => {
     expect(screen.getByLabelText('form')).toBeInTheDocument();
   });
@@ -43,5 +52,14 @@ describe('Form tests', () => {
     userEvent.click(submitButt);
 
     expect(handleSubmit).toBeCalled();
+  });
+
+  test('Pre element renders when compatible input data is entered', async () => {
+    render(<Results data={data} />);
+    const preElement = screen.getByLabelText(/results/);
+
+    expect(preElement).toHaveTextContent(JSON.stringify(data, null, 2), {
+      exact: true,
+    });
   });
 });
