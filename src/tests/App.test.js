@@ -11,6 +11,14 @@ test('App renders correctly', () => {
 });
 
 describe('Form tests', () => {
+  // Grabbing dom elements for this group of testing
+
+  render(<ContactForm />);
+  const firstNameInput = screen.getByLabelText(/first name/i);
+  const lastNameInput = screen.getByLabelText(/last name/i);
+  const emailInput = screen.getByLabelText(/email/i);
+  const messageInput = screen.getByLabelText(/message/i);
+
   // Sanity checker
   test('Form renders correctly/sanity checker', () => {
     render(<ContactForm />);
@@ -19,12 +27,6 @@ describe('Form tests', () => {
   test('Inputs can be typed in and form submitted', () => {
     // Rendering inside each test prevents errors, per the docs
     render(<ContactForm />);
-
-    // Pulling inputs from the DOM for testing
-    const firstNameInput = screen.getByLabelText(/first name/i);
-    const lastNameInput = screen.getByLabelText(/last name/i);
-    const emailInput = screen.getByLabelText(/email/i);
-    const messageInput = screen.getByLabelText(/message/i);
 
     // Putting inputs into an array so they can be tested efficiently
     const allInputs = [firstNameInput, lastNameInput, emailInput, messageInput];
