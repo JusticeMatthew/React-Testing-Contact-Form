@@ -33,10 +33,10 @@ describe('Form tests', () => {
       expect(input.value).toBe('Hi');
     });
 
-    //Pulling button from DOM
+    // Pulling button from DOM
     const submitButton = screen.getByRole('button', { name: /submit/i });
 
-    //Clicking button (The warnings in the console are depriciated, per the docs wrapping with act is not needed)
+    // Clicking button (The warnings in the console are depriciated, per the docs wrapping with act is not needed)
     fireEvent.click(submitButton);
 
     // Pulling the data variable from DOM to ensure it rendered correctly. I used the find method for this since it has a built in wait method.
