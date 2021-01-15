@@ -31,7 +31,7 @@ describe('Form tests', () => {
 
     // Iterating over my inputs array to test them all individually with DRY code
     allInputs.forEach((input) => {
-      // Old nasty way to
+      // Old nasty way
       // fireEvent.type(input, { target: { value: 'Hi' } });
 
       // New improved way
