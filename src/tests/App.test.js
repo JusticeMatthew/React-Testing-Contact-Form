@@ -1,5 +1,7 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+//Removed fireEvent in favor of the new userEvent option :O
+import userEvent from '@testing-library/user-event';
 
 import App from '../App';
 import ContactForm from '../Components/ContactForm';
@@ -29,7 +31,11 @@ describe('Form tests', () => {
 
     // Iterating over my inputs array to test them all individually with DRY code
     allInputs.forEach((input) => {
-      fireEvent.change(input, { target: { value: 'Hi' } });
+      // Old nasty way to
+      // fireEvent.type(input, { target: { value: 'Hi' } });
+
+      // New improved way
+      userEvent.type(input, 'Hi');
       expect(input.value).toBe('Hi');
     });
 
@@ -37,7 +43,7 @@ describe('Form tests', () => {
     const submitButton = screen.getByRole('button', { name: /submit/i });
 
     // Clicking button (The warnings in the console are depriciated, per the docs wrapping with act is not needed)
-    fireEvent.click(submitButton);
+    userEvent.click(submitButton);
 
     // Pulling the data variable from DOM to ensure it rendered correctly. I used the find method for this since it has a built in wait method.
     const renderedPre = screen.findByLabelText(/data display/i);
