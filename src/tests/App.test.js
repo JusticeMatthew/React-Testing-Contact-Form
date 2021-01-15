@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-//Removed fireEvent in favor of the new userEvent option :O
+//Removed fireEvent in favor of the new userEvent option, which more accurately simulates user inputs like adding in keyUp and keyDown events under the .type method INSTEAD of the old .change option which just plugs in the text all at once.
 import userEvent from '@testing-library/user-event';
 
 import App from '../App';
