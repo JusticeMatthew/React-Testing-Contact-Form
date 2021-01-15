@@ -12,7 +12,7 @@ const ContactForm = () => {
 
   return (
     <div className='App'>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} aria-label='form'>
         <div>
           <label htmlFor='firstName'>First Name*</label>
           <input

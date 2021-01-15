@@ -25,7 +25,9 @@ describe('Form tests', () => {
     });
   };
 
-  test('Form renders correctly/sanity checker', () => {});
+  test('Form renders correctly/sanity checker', () => {
+    expect(screen.getByLabelText('form')).toBeInTheDocument();
+  });
 
   test('Inputs can be typed in', () => {
     fillInputs();
