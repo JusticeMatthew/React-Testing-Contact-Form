@@ -12,7 +12,7 @@ const ContactForm = () => {
 
   return (
     <div className='App'>
-      <form onSubmit={handleSubmit(onSubmit)} aria-label='form'>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor='firstName'>First Name*</label>
           <input
@@ -64,11 +64,9 @@ const ContactForm = () => {
         </div>
         {/* // Had to set an aria lable for this because pre elements are not accessible which is not only unacceptable, it also made it hard for the tests to find it. */}
         {data && (
-          <div data-testid='test'>
-            <pre style={{ textAlign: 'left', color: 'white' }}>
-              {JSON.stringify(data)}
-            </pre>
-          </div>
+          <pre style={{ textAlign: 'left', color: 'white' }}>
+            {JSON.stringify(data, null, 2)}
+          </pre>
         )}
         <input type='submit' />
       </form>

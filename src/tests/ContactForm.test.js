@@ -5,7 +5,6 @@ import userEvent from '@testing-library/user-event';
 import ContactForm from '../Components/ContactForm';
 
 describe('Form tests', () => {
-  // Rendering here for grabbing the DOM elements I will need and also rendering in each test
   render(<ContactForm />);
 
   // Grabbing dom elements for this group of testing
@@ -13,6 +12,7 @@ describe('Form tests', () => {
   const lastNameInput = screen.getByLabelText(/last name/i);
   const emailInput = screen.getByLabelText(/email/i);
   const messageInput = screen.getByLabelText(/message/i);
+  const submitButt = screen.getByRole('button');
 
   // Putting inputs into an array so they can be tested efficiently
   const allInputs = [firstNameInput, lastNameInput, emailInput, messageInput];
@@ -27,16 +27,21 @@ describe('Form tests', () => {
     });
   };
 
-  // Per Docs component needs to be rendered in each test to prevent issues
-  test('Form renders correctly/sanity checker', () => {
-    render(<ContactForm />);
-  });
+  test('Form renders correctly/sanity checker', () => {});
 
   test('Inputs can be typed in', () => {
-    render(<ContactForm />);
     fillInputs();
     allInputs.forEach((input) => {
       expect(input.value).toBe('Hi');
     });
+  });
+
+  test('Form submits', () => {
+    const handleSubmit = jest.fn();
+    const submit = jest.fn();
+    render(<ContactForm onSubmit={handleSubmit(submit)} />);
+    userEvent.click(submitButt);
+
+    expect(handleSubmit).toBeCalled();
   });
 });
