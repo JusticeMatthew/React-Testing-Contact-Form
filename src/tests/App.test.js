@@ -14,7 +14,6 @@ describe('Form tests', () => {
     render(<ContactForm />);
   });
 
-  // Test to make sure inputs can be typed in
   test('Inputs can be typed in and form submitted', () => {
     // Rendering inside each test prevents errors, per the docs
     render(<ContactForm />);
