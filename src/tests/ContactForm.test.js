@@ -54,7 +54,7 @@ describe('Form tests', () => {
     expect(handleSubmit).toBeCalled();
   });
 
-  test('Pre element renders when compatible input data is entered', async () => {
+  test('Pre element renders when compatible input data is entered', () => {
     render(<Results data={data} />);
     const preElement = screen.getByLabelText(/results/);
 
