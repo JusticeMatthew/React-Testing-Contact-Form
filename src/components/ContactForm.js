@@ -1,23 +1,28 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import Results from './Results';
 
 const ContactForm = () => {
   const [data, setData] = useState();
   const { register, errors, handleSubmit } = useForm({
-    mode: "onBlur",
+    mode: 'onBlur',
   });
   const onSubmit = (data) => {
     setData(data);
   };
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className='App'>
+      <form onSubmit={handleSubmit(onSubmit)} aria-label='form'>
         <div>
-          <label htmlFor="firstName">First Name*</label>
+          <label htmlFor='firstName'>First Name*</label>
           <input
-            name="firstName"
-            placeholder="Edd"
+            // Fixed the issue that was breaking the test
+            // The label was not attached to any inputs because the firstName lacked it's ID
+            id='firstName'
+            name='firstName'
+            placeholder='Edd'
             ref={register({ required: true, maxLength: 3 })}
           />
           {errors.firstName && (
@@ -26,11 +31,11 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="lastName">Last Name*</label>
+          <label htmlFor='lastName'>Last Name*</label>
           <input
-            id="lastName"
-            name="lastName"
-            placeholder="Burke"
+            id='lastName'
+            name='lastName'
+            placeholder='Burke'
             ref={register({ required: true })}
           />
           {errors.lastName && (
@@ -39,32 +44,29 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email">
-            Email*
-          </label>
-          <input name="email" 
-            id="lastName"
-            placeholder="bluebill1049@hotmail.com"
-            ref={register({ required: true })} 
+          <label htmlFor='email'>Email*</label>
+          <input
+            name='email'
+            // This is also breaking the testing the email field needs the correct ID also
+            id='email'
+            placeholder='bluebill1049@hotmail.com'
+            ref={register({ required: true })}
           />
           {errors.email && (
             <p>Looks like there was an error: {errors.email.type}</p>
           )}
         </div>
         <div>
-          <label htmlFor="message">Message</label>
+          <label htmlFor='message'>Message</label>
           <textarea
-            name="message"
-            id="message" 
-            ref={register({ required: false })} 
+            name='message'
+            id='message'
+            ref={register({ required: false })}
           />
         </div>
-        {data && (
-          <pre style={{ textAlign: "left", color: "white" }}>
-            {JSON.stringify(data, null, 2)}
-          </pre>
-        )}
-        <input type="submit" />
+        {/* Had to literally make a whole new component to get this working because the state plays nicer when it's passed as props so I can set  a value in testing without all the mock config BS*/}
+        <Results data={data} />
+        <input type='submit' />
       </form>
     </div>
   );
